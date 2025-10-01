@@ -165,7 +165,10 @@ get_release <- function(env, ref, candidate_release, debug = FALSE) {
       if (grepl("^\\d{4}-\\d{1,2}-\\d{1,2}(T\\d{1,2}:\\d{1,2}:\\d{1,2})?$",
                 candidate_release,
                 perl = TRUE)) {
-        strftime(candidate_release, "%Y-%m-%dT%H:%M:%S")
+        release <- as.POSIXct(candidate_release,
+                              tz = "Africa/Johannesburg",
+                              format = "%Y-%m-%dT%H:%M:%S")
+        return(strftime(release, "%Y-%m-%dT%H:%M:%S"))
       } else {
         stop("Unacceptable proposed time/date format")
       }
