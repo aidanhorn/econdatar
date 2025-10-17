@@ -4,10 +4,8 @@
 
 2025-09-17  Byron Botha  <byron@codera.co.za>
 
-  - fixed issue with boxing by settting auto_unbox = TRUE in write_dataset and
-	write_database
-	- write_dataset now sets the attribute `series-key` attribute to the name of
-	the series in the list/eds_dataset being written
+  - fixed issue with boxing by settting auto_unbox = TRUE in write_dataset and write_database
+	- write_dataset now sets the attribute `series-key` attribute to the name of the series in the list/eds_dataset being written
 
 2025-08-07  Byron Botha  <byron@codera.co.za>
 
