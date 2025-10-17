@@ -1,3 +1,18 @@
+2025-10-01  Byron Botha  <byron@codera.co.za>
+
+	- corrected the use of strftime in read_dataset
+
+2025-09-17  Byron Botha  <byron@codera.co.za>
+
+  - fixed issue with boxing by settting auto_unbox = TRUE in write_dataset and
+	write_database
+	- write_dataset now sets the attribute `series-key` attribute to the name of
+	the series in the list/eds_dataset being written
+
+2025-08-07  Byron Botha  <byron@codera.co.za>
+
+	- added hist_obs = TRUE option to read_dataset()
+
 2025-01-27  Byron Botha  <byron@codera.co.za>
 
 	- argument tidy = TRUE set as default throughout API
