@@ -53,14 +53,17 @@ read_release <- function(id, tidy = TRUE, ...) {
                   path = c(env$repository$path, "/datasets"),
                   query = list(agencyids = paste(agencyid, collapse = ","),
                                ids = paste(id, collapse = ","),
-                               versions = paste(version, collapse = ",")),
+                               versions = query_versions(version)),
                   add_headers(authorization = get("econdata_token",
                                                   envir = .pkgenv)),
                   accept_json())
   if (response$status_code != 200)
     stop(content(response, type = "application/json"))
   data_message <- content(response, type = "application/json")
-  releases <- lapply(data_message[["data-sets"]], function(dataset) {
+  datasets <- keep_latest_versions(data_message[["data-sets"]],
+                                   version,
+                                   get_ref = identity)
+  releases <- lapply(datasets, function(dataset) {
     dataset_ref <- paste(dataset$agencyid,
                          dataset$id,
                          dataset$version, sep = "-")

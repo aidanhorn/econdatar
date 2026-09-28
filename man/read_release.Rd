@@ -18,7 +18,7 @@ read_release(id, tidy = TRUE, \dots)
 \item{\dots}{Further \emph{optional} arguments:
   \tabular{llll}{
     \code{agencyid} \tab\tab character. Defaults to \code{ECONDATA}. Agency responsible for the metadata creation/maintenance. \cr
-    \code{version} \tab\tab Version of the data definition. \cr
+    \code{version} \tab\tab character. Version of the data definition, or 'all' to return releases for all available versions. Defaults to 'latest', which is resolved by comparing each dot-separated component numerically (so 1.2.13 is later than 1.2.9). \cr
     \code{before} \tab\tab datetime. Returns all releases before a certain date. \cr
     \code{after} \tab\tab datetime. Returns all releases after a certain date. \cr
     \code{description} \tab\tab character. Returns the release whose description matches the given string. \cr

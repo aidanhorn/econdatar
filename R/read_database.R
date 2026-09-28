@@ -45,7 +45,7 @@ read_database <- function(id, include_series = FALSE, tidy = TRUE, ...) {
     query_params <- list()
     query_params$agencyids <- paste(agencyid, collapse = ",")
     query_params$ids <- paste(id, collapse = ",")
-    query_params$versions <- paste(version, collapse = ",")
+    query_params$versions <- query_versions(version)
     response <- GET(env$repository$url,
                     path = c(env$repository$path, "/datasets"),
                     query = query_params,
@@ -61,7 +61,11 @@ read_database <- function(id, include_series = FALSE, tidy = TRUE, ...) {
 
   # Process data set(s) ----
 
-  database <- lapply(data_message[[2]][["data-sets"]], function(raw_data_set) {
+  raw_data_sets <- data_message[[2]][["data-sets"]]
+  if (is.null(params$file)) {
+    raw_data_sets <- keep_latest_versions(raw_data_sets, version)
+  }
+  database <- lapply(raw_data_sets, function(raw_data_set) {
     if (!is.null(params$file)) {
       tmp_data_set <- raw_data_set[[2]]
     } else {

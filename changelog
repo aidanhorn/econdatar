@@ -1,3 +1,11 @@
+2026-09-28  Aidan Horn  <aidan@codera.co.za>
+
+	- version = "latest" (the default) in read_dataset, read_database, read_release
+	  and read_registry is now resolved client-side by numeric comparison of each
+	  dot-separated version component (1.2.13 > 1.2.9). The API compared version
+	  strings lexicographically and returned the wrong version once a component
+	  reached two digits (GitHub issue #46)
+
 2026-03-27  Byron Botha  <byron@codera.co.za>
 
 	- Added tz information to the use of strftime in read_dataset

@@ -19,7 +19,7 @@ read_registry(structure, tidy = TRUE, \dots)
 \item{\dots}{Further \emph{optional} arguments:
   \tabular{llll}{
     \code{agencyid} \tab\tab character. Defaults to \code{ECONDATA}. Agency responsible for the metadata creation/maintenance. \cr
-    \code{version} \tab\tab character. Version(s) of the data (different versions will have different metadata), or 'all' to return all available versions. \cr
+    \code{version} \tab\tab character. Version(s) of the data (different versions will have different metadata), or 'all' to return all available versions. Defaults to 'latest', which is resolved by comparing each dot-separated component numerically (so 1.2.13 is later than 1.2.9). \cr
     \code{file} \tab\tab character. File name for retrieving structures stored as JSON data from disk (output of \code{write_registry()}). \cr
   }
 }

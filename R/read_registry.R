@@ -48,7 +48,7 @@ read_registry <- function(structure, tidy = TRUE, ...) {
   }
   agencyids <- paste(agencyid, collapse = ",")
   ids <- paste(id, collapse = ",")
-  versions <- paste(version, collapse = ",")
+  versions <- query_versions(version)
   structure_data <-
     switch(structure,
            "agency-scheme" =
@@ -74,6 +74,9 @@ read_registry <- function(structure, tidy = TRUE, ...) {
            "provision-agreement" =
            read_prov_agreement(agencyids, ids, versions, params),
            stop("Specified structure, ", structure, ", is not supported."))
+  if (is.null(params$file)) {
+    structure_data <- keep_latest_versions(structure_data, version)
+  }
 
 
   # Process structures ----

@@ -20,7 +20,7 @@ read_database(id, include_series = FALSE, tidy = TRUE, \dots)
 \item{\dots}{Further \emph{optional} arguments:
   \tabular{llll}{
     \code{agencyid} \tab\tab character. Defaults to \code{ECONDATA}. Agency responsible for the metadata creation/maintenance. \cr
-    \code{version} \tab\tab character. Version(s) of the data (different versions will have different metadata), or \code{"all"} to return all available versions. \cr
+    \code{version} \tab\tab character. Version(s) of the data (different versions will have different metadata), or \code{"all"} to return all available versions. Defaults to \code{"latest"}, which is resolved by comparing each dot-separated component numerically (so 1.2.13 is later than 1.2.9). \cr
   }
 }
 

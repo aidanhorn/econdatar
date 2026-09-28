@@ -21,7 +21,7 @@ tidy_data(x, \dots)
 \item{\dots}{Further \emph{optional} arguments:
   \tabular{llll}{
     \code{agencyid} \tab\tab character. Defaults to \code{ECONDATA}. Agency responsible for the metadata creation/maintenance.\cr
-    \code{version} \tab\tab character. Version(s) of the data (different versions will have different metadata), or 'all' to return all available versions.\cr
+    \code{version} \tab\tab character. Version(s) of the data (different versions will have different metadata), or 'all' to return all available versions. Defaults to 'latest', which is resolved by comparing each dot-separated component numerically (so 1.2.13 is later than 1.2.9).\cr
     \code{series_key} \tab\tab character. A character vector specifying a subset of time series (see the web platform (export function) for an example). Select groups of dimensions with a + character and seperate groups with a . character (leave group blank to return all). For example, \code{series_key = "MIN001+MIN002..S"}. \cr
     \code{start_date} \tab\tab any object that can be coerced with as.Date(). The first observation returned by the query.\cr
     \code{end_date} \tab\tab any object that can be coerced with as.Date(). The last observation returned by the query.\cr
