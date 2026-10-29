@@ -154,13 +154,7 @@ tidy_long <- function(x, prettify = TRUE, combine = FALSE, ...) {
       rbindlist(use.names = TRUE, fill = TRUE) |>
       c(lapply(meta, function(x) if (length(x) == 1) rep(x, nseries) else x))
   } else {
-    meta <- attr(x, "metadata")
-    get_vars(meta,
-             c("name",
-               "agencyid",
-               "id",
-               "version",
-               "dataflow")) <- NULL
+    meta <- raw_data_set_metadata(x)
     meta$data_set_name <- data_set_name
     if (!is.null(data_set_description)) {
       meta$description <- NULL
@@ -219,13 +213,7 @@ tidy_metadata <- function(x, prettify = TRUE, ...) {
               attr(x, "metadata")[["dataflow"]][[2]]$agencyid,
               attr(x, "metadata")[["dataflow"]][[2]]$id,
               attr(x, "metadata")[["dataflow"]][[2]]$version)
-    meta <- attr(x, "metadata")
-    get_vars(meta,
-             c("name",
-               "agencyid",
-               "id",
-               "version",
-               "dataflow")) <- NULL
+    meta <- raw_data_set_metadata(x)
     meta$data_set_name <- data_set_name
     if (!is.null(data_set_description)) {
       meta$description <- NULL
@@ -244,6 +232,16 @@ tidy_metadata <- function(x, prettify = TRUE, ...) {
   names(meta) <- tolower(names(meta))
   setcolorder(meta, col_order)
   return(qDT(meta))
+}
+
+raw_data_set_metadata <- function(x) {
+  # Data set level metadata as returned by the API, with the structural
+  # references and any non-atomic elements (e.g. annotations) dropped
+  meta <- attr(x, "metadata")
+  meta <- meta[setdiff(names(meta),
+                       c("name", "agencyid", "id", "version", "dataflow",
+                         "provision-agreement", "annotations"))]
+  return(meta[vapply(meta, is.atomic, logical(1))])
 }
 
 collect_version_names <- function(x, is_release = FALSE) {
